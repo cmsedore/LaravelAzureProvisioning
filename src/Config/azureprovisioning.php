@@ -12,6 +12,7 @@ return [
     'routePrefix' => 'scim/v2.0',
     'middleware' => [EnsureTokenIsValid::class, SubstituteBindings::class, ],
     'token'=>env('SCIM_TOKEN',''),
+    'debug_logging' => false, // log all requests and responses to the default log stream at debug level
 
     /**
      * User Resource Type settings
