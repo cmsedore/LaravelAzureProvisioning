@@ -1,6 +1,8 @@
 <?php
 
+use RobTrehy\LaravelAzureProvisioning\Middleware\EnsureTokenIsValid;
 use RobTrehy\LaravelAzureProvisioning\Utils\SCIMConstantsV2;
+use Illuminate\Routing\Middleware\SubstituteBindings;
 
 return [
 
@@ -8,6 +10,8 @@ return [
      * Set the prefix for the SCIM service routes
      */
     'routePrefix' => 'scim/v2.0',
+    'middleware' => [EnsureTokenIsValid::class, SubstituteBindings::class, ],
+    'token'=>env('SCIM_TOKEN',''),
 
     /**
      * User Resource Type settings
