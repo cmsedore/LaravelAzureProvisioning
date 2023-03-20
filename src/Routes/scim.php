@@ -7,9 +7,8 @@ use RobTrehy\LaravelAzureProvisioning\Controllers\ServiceProviderController;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Support\Facades\Route;
 
-Route::group([
+Route::middleware(config('azureprovisioning.middleware', [SubstituteBindings::class]))->group([
         'prefix' => config('azureprovisioning.routePrefix'),
-        'middleware' => config('azureprovisioning.middleware', [SubstituteBindings::class])
     ], function () {
         Route::get('/ServiceProviderConfig', [ServiceProviderController::class, 'index']);
         Route::get('/Schemas', [SchemaController::class, 'index']);
