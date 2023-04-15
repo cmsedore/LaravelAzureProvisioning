@@ -151,7 +151,7 @@ class UsersResourceType extends ResourceType
                             $object->{$attribute}->add($value);
                         }
                     } else {
-                        $object->{$attribute}->add($operation['value']);
+                        $object->{$attribute}=$operation['value'];
                     }
                 } else {
                     foreach ($operation['value'] as $key => $value) {
