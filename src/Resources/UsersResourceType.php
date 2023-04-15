@@ -5,6 +5,7 @@ namespace RobTrehy\LaravelAzureProvisioning\Resources;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use RobTrehy\LaravelAzureProvisioning\Exceptions\AzureProvisioningException;
 
 class UsersResourceType extends ResourceType
@@ -146,6 +147,10 @@ class UsersResourceType extends ResourceType
             case "add":
                 if (isset($operation['path'])) {
                     $attribute = $this->getMappingForAttribute($operation['path']);
+                    if (!$attribute) {
+                        Log::debug("no mapping found for ".$operation['path']);
+                        return $object;
+                    }
                     if (is_array($operation['value'])) {
                         foreach ($operation['value'] as $value) {
                             $object->{$attribute}->add($value);
